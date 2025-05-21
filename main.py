@@ -35,13 +35,16 @@ logging.basicConfig(
 if __name__ == "__main__":
     # При запуске в переменную start_mod_time записывается словарь
     # {время изменения файла: имя файла}
-    start_mod_time = local_check_time(env["LOCAL_PATH"])
+    # start_mod_time = local_check_time(env["LOCAL_PATH"])
     logger.info("\nЗапуск программы...")
+    start_mod_time = local_check_time(env["LOCAL_PATH"])
     while True:
         # В переменную cloud_files записываются названия файлов из облака
         cloud_files = connect.get_info()
-        # В переменную local_files записываются названия файлов в облаке
+
+        # В переменную local_files записываются названия локальных файлов
         local_files = local_get_info(env["LOCAL_PATH"])
+
 
         # Если кол-во файлов в облаке и на диске не равны между собой,
         # программа пробует загрузить или удалить файлы
@@ -57,7 +60,7 @@ if __name__ == "__main__":
                         # Метод connect.load загружает файлы на диск
                         connect.load(name=i_load_file)
                         logger.info(f"На диск был загружен файл: {i_load_file}")
-
+                start_mod_time = local_check_time(env["LOCAL_PATH"])
             # При возникновении ошибок программа записывает лог в файл логов, но не прекращает работу
             except Exception as ex:
                 logger.error(ex)
@@ -83,7 +86,6 @@ if __name__ == "__main__":
                 # В пременную time_mod записываетсся словарь
                 # {Время изменения файла: имя файла}
                 time_mod = local_check_time(env["LOCAL_PATH"])
-
                 # Если файл изменялся с момента начала прогаммы выполняется блок if
                 if (
                     start_mod_time != time_mod

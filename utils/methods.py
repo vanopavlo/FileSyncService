@@ -70,5 +70,5 @@ def local_check_time(path):
     files = local_get_info(path)
     time = []
     for i_file in sorted(files):
-        time.append(os.path.getctime(path + "/" + i_file))
+        time.append(os.path.getmtime(path + "/" + i_file))
     return dict(zip(time, files))
