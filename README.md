@@ -61,7 +61,7 @@ _Схема логики работы проекта Yandex Disk File Sync_
 1. **Клонируйте репозиторий:**
 
     ```bash
-    git clone https://github.com/vanopavlo/FileSync.git
+    git clone https://github.com/vanopavlo/FileSyncService
     cd FileSync
     ```
 
